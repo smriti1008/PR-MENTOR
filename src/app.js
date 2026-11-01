@@ -2,9 +2,11 @@ const express = require('express');
 const projectRoutes = require('./routes/projectRoutes')
 const userRoutes = require("./routes/userRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
+const logger = require("./middlewares/loggerMiddleware")
 const app = express();
 
 app.use(express.json());
+app.use(logger)
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({
