@@ -6,4 +6,4 @@ const {
 
 const router = express.Router();
 router.get("/about", getAbout);
-module.expports = router;
+module.exports = router;
