@@ -87,10 +87,22 @@
 require("dotenv").config();
 
 const app = require("./src/app");
+const connectDB = require("./src/config/db")
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`PR Mentor server running on port ${PORT}`);
-});
+const startServer = async()=>{
+  try{
+    await connectDB();
 
+    app.listen(PORT, ()=>{
+      console.log(`PR Mentor running on port ${PORT}`);
+    })
+  }
+  catch(error){
+    console.error("Server startup failed");
+    process.exit(1);
+  }
+}
+
+startServer();
