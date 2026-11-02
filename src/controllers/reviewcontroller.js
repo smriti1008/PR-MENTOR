@@ -1,4 +1,5 @@
 const reviewService = require("../services/reviewServices")
+const APIerror = require("../utils/ApiError")
 
 const createReview = async(req, res)=>{
     const review = await reviewService.createReview(     //it returns a promise thst's why we use await here
@@ -11,5 +12,9 @@ const createReview = async(req, res)=>{
         data: review
     })
 }
+const getReviewById = (req, res)=>{
+    const {id} = req.params;
+    throw new APIerror(404, "Review not found");
+}
 
-module.exports = {createReview};
+module.exports = {createReview, getReviewById};

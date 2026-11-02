@@ -5,6 +5,11 @@ const notFound = (req, res, next)=>{
 };
 
 const errorHandler = (err, req, res, next)=>{
+
+    if(res.headersSent){
+        return next(err);
+    }
+
     const isOperational = err instanceof ApiError;
 
     const statusCode = isOperational
