@@ -4,6 +4,8 @@ const router = express.Router();
 
 const {createFeedback} = require("../controllers/feedbackController")
 
-router.post ("/", createFeedback);
+const validateFeedback = require("../middlewares/validateFeedback")
+
+router.post ("/",validateFeedback, createFeedback);
 
 module.exports = router;

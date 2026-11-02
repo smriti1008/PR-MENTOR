@@ -14,7 +14,7 @@ const createFeedback = async (req, res, next)=>{
         name, 
         message
     })
-    return res.send(201).json({
+    return res.status(201).json({
         success: true,
         message: "feedback recieved successfully",
         data: feedback
