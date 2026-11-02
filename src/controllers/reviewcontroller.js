@@ -6,15 +6,54 @@ const createReview = async(req, res)=>{
         req.body
     )
 
-    res.status(200).json({
+    res.status(201).json({
         success: "true",
-        message: "Review preview generated successfully",
+        message: "Review created successfully",
         data: review
     })
 }
-const getReviewById = (req, res)=>{
-    const {id} = req.params;
-    throw new APIerror(404, "Review not found");
+
+
+const getAllReviews = async(req, res)=>{
+    const reviews = await reviewService.getAllReviews();
+
+    res.status(200).json({
+        succes: true,
+        count: reviews.length,
+        data: reviews
+    });
 }
 
-module.exports = {createReview, getReviewById};
+const getReviewById = async(req, res)=>{
+    const review = await reviewService.getReviewById();
+
+    res.status(200).json({
+        success:true,
+        data: review
+    })
+}
+
+const updateReview = async(req, res)=>{
+    const review = await reviewService.updateReview(
+        req.params.id,
+        req.body
+    );
+
+    res.status(200).json({
+        success: true,
+        message: "Review updated successfully",
+        data: review
+    })
+}
+
+const deleteReview = async(req, res)=>{
+    await reviewService.deleteReview(req.params.id);
+
+    res.status(200).json({
+        success: true,
+        message: "Review deleted successfully",
+    })
+}
+
+module.exports = {createReview, getAllReviews, getReviewById, updateReview,
+  deleteReview}
