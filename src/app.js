@@ -3,6 +3,7 @@ const cors = require("cors")
 const projectRoutes = require('./routes/projectRoutes')
 const userRoutes = require("./routes/userRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
+const feedbackRoutes = require("./routes/feedbackRoutes")
 const logger = require("./middlewares/loggerMiddleware")
 const {notFound, errorHandler} = require("./middlewares/errorMiddleware")
 const app = express();
@@ -20,6 +21,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api", projectRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/feedback", feedbackRoutes)
 app.use(notFound);
 app.use(errorHandler);
 
