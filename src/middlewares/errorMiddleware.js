@@ -10,6 +10,14 @@ const errorHandler = (err, req, res, next)=>{
         return next(err);
     }
 
+    if (err.name === "ValidationError") {
+        return res.status(400).json({
+            success: false,
+            message: "Database validation failed",
+            errors: Object.values(err.errors).map(e => e.message)
+        });
+    }
+
     const isOperational = err instanceof ApiError;
 
     const statusCode = isOperational
